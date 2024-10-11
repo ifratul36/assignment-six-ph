@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peddy Website</title>
+    <!-- daisyUi and tailwind-css -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.12/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- font awsome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+    <header class="w-11/12 mx-auto">
+        <nav>
+            <div class="navbar">
+                <div class="navbar-start">
+                  <div class="dropdown">
+                    <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M4 6h16M4 12h8m-8 6h16" />
+                      </svg>
+                    </div>
+                    <ul
+                      tabindex="0"
+                      class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow-xl">
+                      <li><a>Home</a></li>
+                      <li><a>Shop</a> </li>
+                      <li><a>Contact</a></li>
+                    </ul>
+                  </div>
+                  <a class="btn btn-ghost text-xl"><img src="./images/logo.webp" alt=""><span class="font-bold text-xl">Peddy</span></a>
+                </div>
+                <div class="navbar-center hidden lg:flex">
+                  <ul class="menu menu-horizontal px-1 items-center">
+                    <li><a>Home</a></li>
+                    <li>Shop</li>
+                    <li><a>Contact</a></li>
+                  </ul>
+                </div>
+                <div class="navbar-end">
+                  <a class="w-10 h-10 rounded-full border border-[#0e798126] flex justify-center items-center"><span><i class="fa-solid fa-user"></i></span></a>
+                </div>
+              </div>
+        </nav>
+        <!-- banner section -->
+         <div class="border p-10">
+            <h1 class="border lg:w-[50%] mx-auto text-center">
+                <span>Bringing Families Together ❤️‍🔥</span><br><br>
+                <span class="text-5xl text-center font-semibold text-[#131313]">Your Path to Adoption <br> Starts Here</span><br><br>
+            </h1>
+            <p class="text-[#131313] lg:w-[50%] mx-auto text-center">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
+            <br>
+           <div class="flex justify-center"> <button id="view-more-btn"  class="btn text-[#FFFF] bg-[#0E7A81] px-8 ">View More</button></div>
+           <br>
+           <div class="border lg:w-[50%] mx-auto">
+            <img src="./images/pet.webp" alt="">
+           </div>
+         </div>
+    </header>
+    <br><br>
+    <main class="lg:w-11/12 mx-auto  space-y-4 mb-4 p-2">
+      <section>
+        <!-- Adopt  Your  Best Friend -->
+         <div class="lg:w-[50%] mx-auto text-center space-y-4">
+          <h2 class="font-semibold text-3xl">Adopt  Your  Best Friend</h2>
+          <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
+         </div>
+      </section>
+      <div id="modal" class="modal hidden">
+        <div id="modal-content" class="modal-content"></div>
+    </div>
+        
+
+      <nav id="categories" class="py-8  border flex lg:gap-5 md:gap-5 gap-4 justify-center items-center"></nav>
+
+
+       <section id="main-section" class="lg:grid  lg:grid-cols-6 gap-2 lg:p-4 mb-4">
+        <div id="left-div" class="lg:grid  md:grid  lg:grid-cols-3 md:grid-cols-4 lg:p-2 col-span-4 gap-4 rounded-xl "></div>
+        <div id="right-div" class=" border rounded-xl my-2 lg:col-span-2"></div>
+       </section>
+  
+    </main>
+
+<!-- Open the modal using ID.showModal() method -->
+<button id="showModalData" class="btn hidden" onclick="customModal.showModal()">open modal</button>
+<dialog id="customModal" class="modal">
+  <div class="modal-box">
+   <div id="modal-content">
+
+   </div>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Cancel</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+
+
+    <footer class="bg-[#131313]  ">
+     <div class="footer w-11/12 text-base-content p-10 mx-auto lg:flex gap-5 justify-between items-center">   
+        <nav>
+        <h6 class=" text-[#ffffffdd] text-lg  font-semibold">Services</h6>
+        <a class="text-[#ffffffa0] link link-hover">Location: av. Washington 165, NY CA 54003</a>
+        <a class="text-[#ffffffa0] link link-hover"> Phone: +31 85 964 47 25</a>
+        <a class="text-[#ffffffa0] link link-hover">Email: info@yourdomain.com</a>
+        <a class="text-[#ffffffa0] link link-hover">Openings hours: 9.00 AM - 5.00 PM</a>
+        
+       
+
+      </nav>
+      <br>
+      <nav>
+        <h6 class=" text-[#ffffffe8] text-lg  font-semibold">Useful Links</h6>
+        <a class="text-[#ffffffa0] link link-hover">Home</a>
+        <a class="text-[#ffffffa0] link link-hover">About us</a>
+        <a class="text-[#ffffffa0] link link-hover">Animals</a>
+        <a class="text-[#ffffffa0] link link-hover">Foundation</a>
+        <a class="text-[#ffffffa0] link link-hover">Contact</a>
+      </nav>
+      <br>
+
+      <form>
+        <h6 class=" text-[#ffffffe8] text-lg  font-semibold">Drop a Message</h6>
+        <br>
+        <fieldset class="form-control w-80">
+      
+          
+          <div class="">
+            <input
+              type="text"
+              placeholder="Enter Your Email"
+              class="input input-bordered bg-[#5A5A5A] z-10" />
+              <br><br>
+            <button class="btn btn  border-none text-[#FFF] join-item bg-[#0E7A81] w-[67%]">Subscribe</button>
+          </div>
+        </fieldset>
+        
+      </form>
+    </div>
+
+      </footer>
+   
+
+  
+      <script src="script.js"></script>
+
+</body>
+</html>
+
