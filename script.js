@@ -1,3 +1,6 @@
+
+
+
 // create loadCategories
 const loadCategories = () => {
 
@@ -7,10 +10,18 @@ const loadCategories = () => {
     .then(res => res.json())
     .then(data => displayCategories(data.categories))
     .catch((error) => console.error(error));
-}
-// create loadCategories
-const loadAllPets = () => {
 
+
+ document.getElementById('spinner').style.display="block";
+
+    setTimeout(function(){
+        loadAllPets()
+    },3000)
+}
+// // create loadCategories
+const loadAllPets = () => {
+    document.getElementById('spinner').style.display="none";
+    console.log('wow 3 second')
 
     // fetch the data
     fetch('https://openapi.programming-hero.com/api/peddy/pets')
@@ -18,6 +29,8 @@ const loadAllPets = () => {
     .then(data => displayPets(data.pets))
     .catch((error) => console.error(error));
 }
+
+
 
 const loadCategoryPets = (categoryName) =>{
     // alert(categoryName);
@@ -67,14 +80,52 @@ detailsContainer.innerHTML = `<div class=" p-4 md:my-4 lg:my-0 rounded-xl shadow
                         <button class="like-btn border border-[#0E7A81] pl-3 text-[#0E7A81] mt-2 rounded-lg px-2 py-1 mr-2">Like</button>
                     </div>
                 </div>`;
-// document.getElementById('customModal').showModal();
-document.getElementById('showModalData').click();
+document.getElementById('customModal').showModal();
+// document.getElementById('showModalData').click();
 
 }
 
 
 
-  // create displayPets 
+// Close modal on Cancel button click
+document.querySelector('#customModal .modal-action button').addEventListener('click', () => {
+    const modal = document.getElementById('customModal');
+    modal.close();
+});
+
+
+// Close modal on Cancel button click
+document.querySelector('#customModal .modal-action button').addEventListener('click', () => {
+    const modal = document.getElementById('customModal');
+    modal.close();
+});
+
+// Adopt pet function
+const adoptPet = (petId) => {
+    const adoptButton = document.querySelector(`button[onclick="adoptPet('${petId}')"]`);
+    adoptButton.disabled = true; // Disable the adopt button to prevent multiple clicks
+    let countdown = 3;
+    const countdownInterval = setInterval(() => {
+        if (countdown > 0) {
+            adoptButton.textContent = `Adopting in ${countdown}...`;
+            countdown--;
+        } else {
+            clearInterval(countdownInterval);
+            adoptButton.textContent = "Adopted!";
+            showAdoptedModal(); // Show adopted modal
+        }
+    }, 1000);
+}
+
+// Show adopted modal
+const showAdoptedModal = () => {
+    const adoptedModal = document.getElementById('adopted-modal');
+    adoptedModal.showModal();
+}
+
+
+
+//   create displayPets 
 const displayPets = (pets) => {
 const petContainer = document.getElementById('left-div');
 petContainer.innerHTML = "";
@@ -107,14 +158,25 @@ if(pets.length == 0){
                     <hr class="w-[98%] mx-auto">
 
                     <div class="mt-1 flex justify-between items-center px-2">
-                        <button class="like-btn border border-[#0E7A81] pl-3 text-[#0E7A81] mt-2 rounded-lg px-2 py-1 mr-2">Like</button>
+                        <button class="like-btn border border-[#0E7A81] pl-3 text-[#0E7A81] mt-2 rounded-lg px-2 py-1 mr-2"  onclick="likePet(${pet.id}, '${pet.image}')">Like</button>
                         <button class="adopt-btn border pl-3 border-[#0E7A81] text-[#0E7A81] mt-2 rounded-lg px-4 py-1 mr-2">Adopt</button>
-                        <button class="details-btn border pl-3 border-[#0E7A81] text-[#0E7A81] mt-2 rounded-lg px-4 py-1" onclick="loadDetails(${pet.petId})">Details</button>
+                        <button class="details-btn border pl-3 border-[#0E7A81] text-[#0E7A81] mt-2 rounded-lg px-4 py-1" onclick="loadDetails('${pet.petId}')">Details</button>
                     </div>
                 </div>`;
      petContainer.append(card);
  })
 }
+
+
+
+
+  
+  // Handle Liking a Pet
+  const likePet = (petId, petImage) => {
+    const rightDiv = document.getElementById('right-div');
+    const likedImage = `<img src="${petImage}" alt="Liked Pet" class="border p-2 w-[40%] h-30 object-cover rounded-md shadow-lg mt-2" />`;
+    rightDiv.innerHTML += likedImage;
+  };
 
 // create displayCategories
 const displayCategories = (categories) => {
@@ -139,5 +201,18 @@ const displayCategories = (categories) => {
    });
    
 }
+
+document.getElementById('viewMoreBtn').addEventListener('click', function() {
+    // Scroll to the "Adopt Your Best Friend" section
+    const adoptSection = document.getElementById('adoptSection');
+    adoptSection.scrollIntoView({ behavior: 'smooth' });
+  });
+  
+
+
 loadCategories();
 loadAllPets();
+
+
+
+ 
