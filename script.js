@@ -32,9 +32,11 @@ const loadAllPets = () => {
 
 // Function to sort pets by price
 const sortPetsByPrice = () => {
-    const sortedPets = [...allPets].sort((a, b) => b.price - a.price); // Descending order
+    const sortedPets =[...allPets].sort((a, b) => b.price - a.price); // Descending order
     displayPets(sortedPets); // Display sorted pets
 };
+
+
 
 const loadCategoryPets = (categoryName) =>{
     // alert(categoryName);
@@ -45,6 +47,7 @@ const loadCategoryPets = (categoryName) =>{
         removeActiveClass();
         const activBtn = document.getElementById(`btn-${categoryName}`);
         activBtn.classList.add("active");
+        console.log(activBtn)
         console.log(activBtn)
         displayPets(data.data);
         console.log(activBtn);
@@ -65,12 +68,14 @@ const loadDetails = async (petId) => {
   const uri = `https://openapi.programming-hero.com/api/peddy/pet/${petId}`;
   const res = await fetch(uri);
   const data = await res.json();
-  console.log(data);
+  displayDetails(data);
 }
 const displayDetails = (pet) => {
 console.log(pet);
 const detailsContainer = document.getElementById('modal-content');
-detailsContainer.innerHTML = `<div class=" p-4 md:my-4 lg:my-0 rounded-xl shadow-md mb-2">
+
+const card = document.createElement('div');
+card.innerHTML = `<div class=" p-4 md:my-4 lg:my-0 rounded-xl shadow-md mb-2">
                     <img src="${pet.image}" alt="${pet.name}" class="w-[100%] h-[50%] object-cover mb-2 rounded-xl">
                     <h3 class="text-xl font-bold pl-3">${pet.pet_name}</h3>
                     <p class="text-[#1313139a] pl-3">Breed: ${pet.breed}</p>
@@ -84,10 +89,12 @@ detailsContainer.innerHTML = `<div class=" p-4 md:my-4 lg:my-0 rounded-xl shadow
                         <button class="like-btn border border-[#0E7A81] pl-3 text-[#0E7A81] mt-2 rounded-lg px-2 py-1 mr-2">Like</button>
                     </div>
                 </div>`;
+                detailsContainer.append(card);
 document.getElementById('customModal').showModal();
 // document.getElementById('showModalData').click();
-
+ 
 }
+
 
 
 
@@ -99,6 +106,7 @@ document.querySelector('#customModal .modal-action button').addEventListener('cl
 
 // Adopt pet function
 const adoptPet = (petId) => {
+    
     const adoptButton = document.querySelector(`button[onclick="adoptPet('${petId}')"]`);
     adoptButton.disabled = true; // Disable the adopt button to prevent multiple clicks
     let countdown = 3;
@@ -134,6 +142,7 @@ if(pets.length == 0){
     <div class="flex justify-center items-center"><img class="w-[30%] h-[30%]" src="./images/error.webp" /></div>
   
     <p class="text-3xl font-bold text-center">No Information Available</p>
+    <p class="text-lg font-normal mt-1 text-center">Currently, there is no information available to display. Please check back later or try a different category to see more options.</p>
     </div>
     `;
     return;
@@ -156,7 +165,7 @@ if(pets.length == 0){
 
                     <div class="mt-1 flex justify-between items-center px-2">
                         <button class="like-btn border border-[#0E7A81] pl-3 text-[#0E7A81] mt-2 rounded-lg px-2 py-1 mr-2"  onclick="likePet(${pet.id}, '${pet.image}')">Like</button>
-                        <button class="adopt-btn border pl-3 border-[#0E7A81] text-[#0E7A81] mt-2 rounded-lg px-4 py-1 mr-2">Adopt</button>
+                        <button id=${pet.petId} class="adopt-btn border pl-3 border-[#0E7A81] text-[#0E7A81] mt-2 rounded-lg px-4 py-1 mr-2" onclick="adoptPet('${pet.petId}')">Adopt</button>
                         <button class="details-btn border pl-3 border-[#0E7A81] text-[#0E7A81] mt-2 rounded-lg px-4 py-1" onclick="loadDetails('${pet.petId}')">Details</button>
                     </div>
                 </div>`;
@@ -171,7 +180,7 @@ if(pets.length == 0){
   // Handle Liking a Pet
   const likePet = (petId, petImage) => {
     const rightDiv = document.getElementById('right-div');
-    const likedImage = `<img src="${petImage}" alt="Liked Pet" class="border p-2 w-[40%] h-30 object-cover rounded-md shadow-lg mt-2" />`;
+    const likedImage = `<img src="${petImage}" alt="Liked Pet" class="border p-2 w-[100%] h-30 object-cover rounded-md shadow-lg mt-2" />`;
     rightDiv.innerHTML += likedImage;
   };
 
@@ -181,12 +190,12 @@ const displayCategories = (categories) => {
 
 
    categories.forEach((item) => {
-
+console.log(item)
     // // create a button
     const buttonContainer = document.createElement('div');
     buttonContainer.innerHTML = `
     
-    <button id="btn-${item.category}" onclick="loadCategoryPets('${item.category}')" class="rounded-xl  lg:px-20 md:px-10 px-6 border border-[#0E7A81] bg-transparent lg:py-5 md:py-4 py-3 font-bold text-xl category-btn"> 
+    <button id="btn-${item.category}" onclick="loadCategoryPets('${item.category}')" class="rounded-xl  lg:px-20 md:px-10 px-6 border border-[#0E7A81]  lg:py-5 md:py-4 py-3 font-bold text-xl category-btn"> 
      ${item.category}
     </button> 
     
