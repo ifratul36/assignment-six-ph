@@ -30,7 +30,11 @@ const loadAllPets = () => {
     .catch((error) => console.error(error));
 }
 
-
+// Function to sort pets by price
+const sortPetsByPrice = () => {
+    const sortedPets = [...allPets].sort((a, b) => b.price - a.price); // Descending order
+    displayPets(sortedPets); // Display sorted pets
+};
 
 const loadCategoryPets = (categoryName) =>{
     // alert(categoryName);
@@ -93,13 +97,6 @@ document.querySelector('#customModal .modal-action button').addEventListener('cl
     modal.close();
 });
 
-
-// Close modal on Cancel button click
-document.querySelector('#customModal .modal-action button').addEventListener('click', () => {
-    const modal = document.getElementById('customModal');
-    modal.close();
-});
-
 // Adopt pet function
 const adoptPet = (petId) => {
     const adoptButton = document.querySelector(`button[onclick="adoptPet('${petId}')"]`);
@@ -133,10 +130,10 @@ petContainer.innerHTML = "";
 if(pets.length == 0){
     petContainer.classList.remove("grid", "lg:grid-cols-3", "md:grid-cols-4");
     petContainer.innerHTML = `
-    <div class="bg-[#F4F4F4] w-full">
-    <div class="flex justify-center items-center"><img class="w-[50%] h-[40%]" src="./images/error.webp" /></div>
-    <br>
-    <p class="text-2xl font-bold">No Information Available</p>
+    <div class="bg-[#F4F4F4] w-full p-5 rounded-xl">
+    <div class="flex justify-center items-center"><img class="w-[30%] h-[30%]" src="./images/error.webp" /></div>
+  
+    <p class="text-3xl font-bold text-center">No Information Available</p>
     </div>
     `;
     return;
@@ -189,7 +186,7 @@ const displayCategories = (categories) => {
     const buttonContainer = document.createElement('div');
     buttonContainer.innerHTML = `
     
-    <button id="btn-${item.category}" onclick="loadCategoryPets('${item.category}')" class="rounded-xl  lg:px-20 md:px-10 px-6 border border-[#0E7A81] bg-transparent lg:py-5 md:py-4 py-3 font-bold text-xl category-btn">
+    <button id="btn-${item.category}" onclick="loadCategoryPets('${item.category}')" class="rounded-xl  lg:px-20 md:px-10 px-6 border border-[#0E7A81] bg-transparent lg:py-5 md:py-4 py-3 font-bold text-xl category-btn"> 
      ${item.category}
     </button> 
     
